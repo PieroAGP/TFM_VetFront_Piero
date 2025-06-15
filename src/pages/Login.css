@@ -1,0 +1,16 @@
+.login-page {
+  background-color: #F1EFEC;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.btn-dark {
+  background-color: #4A4A48;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #343432;
+}

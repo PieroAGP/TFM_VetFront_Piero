@@ -1,12 +1,18 @@
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeIn 0.6s ease forwards;
 }
 
-@keyframes fadeInUp {
+@keyframes fadeIn {
   to {
     opacity: 1;
-    transform: translateY(0);
   }
+}
+
+.custom-container{
+  margin-top: 4.5rem !important;
+}
+
+.custom-button{
+  border-radius: 7px !important;
 }

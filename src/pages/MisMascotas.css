@@ -17,3 +17,11 @@
 .object-fit-cover {
   object-fit: cover;
 }
+
+.custom-container {
+  margin-top: 4.5rem !important;
+}
+
+.custom-button{
+  border-radius: 7px !important;
+}

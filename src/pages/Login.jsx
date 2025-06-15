@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import './Login.css';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -26,12 +27,11 @@ const Login = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error');
 
-      // Obtener sesión actual
       const session = await fetch('http://localhost:4000/users/session', {
         credentials: 'include',
       });
-      const sessionData = await session.json();
 
+      const sessionData = await session.json();
       if (session.ok) {
         setUser(sessionData.user);
         navigate('/');
@@ -42,14 +42,37 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="card p-4 shadow">
-        <h2>Login</h2>
-        {mensaje && <div className="alert alert-info">{mensaje}</div>}
+    <div className="login-page d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: '#F1EFEC' }}>
+      <div className="card shadow p-4" style={{ maxWidth: '400px', width: '100%' }}>
+        <h3 className="text-center mb-4">Iniciar Sesión</h3>
+        {mensaje && <div className="alert alert-danger">{mensaje}</div>}
+
         <form onSubmit={handleSubmit}>
-          <input type="email" name="email" placeholder="Email" className="form-control mb-2" value={form.email} onChange={handleChange} required />
-          <input type="password" name="password" placeholder="Contraseña" className="form-control mb-2" value={form.password} onChange={handleChange} required />
-          <button type="submit" className="btn btn-success w-100">Iniciar Sesión</button>
+          <div className="mb-3">
+            <input
+              type="email"
+              name="email"
+              className="form-control"
+              placeholder="Correo electrónico"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              placeholder="Contraseña"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-dark w-100">Entrar</button>
         </form>
       </div>
     </div>

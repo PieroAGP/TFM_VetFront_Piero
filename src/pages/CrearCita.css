@@ -87,3 +87,12 @@
     padding: 0.6rem 1.2rem;
   }
 }
+
+
+.custom-container {
+  margin-top: 4.5rem !important;
+}
+
+.custom-button{
+  border-radius: 7px !important;
+}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './Register.css';
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -7,15 +8,15 @@ const Register = () => {
     password: '',
     edad: '',
     ubicacion: '',
-  })
-  const [mensaje, setMensaje] = useState('')
+  });
+  const [mensaje, setMensaje] = useState('');
 
   const handleChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const res = await fetch('http://localhost:4000/users', {
@@ -24,33 +25,83 @@ const Register = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(form),
-      })
+      });
 
-      const data = await res.json()
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Error');
 
-      if (!res.ok) throw new Error(data.error || 'Error')
-
-      setMensaje('¡Registro exitoso!')
-      setForm({ nombre: '', email: '', password: '', edad: '', ubicacion: '' })
+      setMensaje('¡Registro exitoso!');
+      setForm({ nombre: '', email: '', password: '', edad: '', ubicacion: '' });
     } catch (err) {
-      setMensaje(err.message)
+      setMensaje(err.message);
     }
-  }
+  };
 
   return (
-    <div className="card p-4 shadow">
-      <h2>Registro</h2>
-      {mensaje && <div className="alert alert-info">{mensaje}</div>}
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="nombre" placeholder="Nombre" className="form-control mb-2" value={form.nombre} onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" className="form-control mb-2" value={form.email} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Contraseña" className="form-control mb-2" value={form.password} onChange={handleChange} required />
-        <input type="number" name="edad" placeholder="Edad" className="form-control mb-2" value={form.edad} onChange={handleChange} />
-        <input type="text" name="ubicacion" placeholder="Ubicación" className="form-control mb-2" value={form.ubicacion} onChange={handleChange} />
-        <button type="submit" className="btn btn-primary w-100">Registrarse</button>
-      </form>
+    <div className="register-page d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: '#F1EFEC' }}>
+      <div className="card shadow p-4" style={{ maxWidth: '450px', width: '100%' }}>
+        <h3 className="text-center mb-4">Crear Cuenta</h3>
+        {mensaje && <div className={`alert ${mensaje.includes('exitoso') ? 'alert-success' : 'alert-danger'}`}>{mensaje}</div>}
+        
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre"
+              className="form-control"
+              value={form.nombre}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              className="form-control"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              className="form-control"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="number"
+              name="edad"
+              placeholder="Edad"
+              className="form-control"
+              value={form.edad}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="ubicacion"
+              placeholder="Ubicación"
+              className="form-control"
+              value={form.ubicacion}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="submit" className="btn btn-dark w-100">Registrarse</button>
+        </form>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import MascotaModal from '../components/MascotaModal';
-import './MisMascotas.css'; // ← añadimos el CSS
+import './MisMascotas.css';
 
 const MisMascotas = () => {
   const { user } = useAuth();
@@ -65,11 +65,11 @@ const MisMascotas = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div className="container custom-container">
+      <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2 py-5">
         <h2 className="mb-0">Mis Mascotas</h2>
         <button
-          className="btn btn-outline-primary btn-sm rounded-pill"
+          className="btn btn-outline-primary btn-sm custom-button"
           onClick={() => {
             setMascotaEditando(null);
             setModalVisible(true);
@@ -105,13 +105,13 @@ const MisMascotas = () => {
                   </div>
                   <div className="d-flex justify-content-between mt-3">
                     <button
-                      className="btn btn-sm btn-outline-primary rounded-pill"
+                      className="btn btn-sm btn-outline-primary custom-button"
                       onClick={() => handleEditar(mascota)}
                     >
                       ✏️ Editar
                     </button>
                     <button
-                      className="btn btn-sm btn-outline-danger rounded-pill"
+                      className="btn btn-sm btn-outline-danger custom-button"
                       onClick={() => handleEliminar(mascota._id)}
                     >
                       🗑️ Eliminar

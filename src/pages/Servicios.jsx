@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import ServicioModal from '../components/ServicioModal';
 
+import './Servicios.css'; 
+
 const Servicios = () => {
   const { user } = useAuth();
   const [servicios, setServicios] = useState([]);
@@ -13,13 +15,12 @@ const Servicios = () => {
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const response = await fetch('http://localhost:4000/servicios', {
+        const res = await fetch('http://localhost:4000/servicios', {
           method: 'GET',
           credentials: 'include',
         });
-
-        if (!response.ok) throw new Error('Error al cargar los servicios');
-        const data = await response.json();
+        if (!res.ok) throw new Error('Error al cargar los servicios');
+        const data = await res.json();
         setServicios(data);
       } catch (err) {
         setError(err.message);
@@ -32,11 +33,11 @@ const Servicios = () => {
   }, []);
 
   const handleServicioGuardado = (servicio) => {
-    if (servicioEditando) {
-      setServicios(prev => prev.map(s => (s._id === servicio._id ? servicio : s)));
-    } else {
-      setServicios(prev => [...prev, servicio]);
-    }
+    setServicios(prev =>
+      servicioEditando
+        ? prev.map(s => (s._id === servicio._id ? servicio : s))
+        : [...prev, servicio]
+    );
     setServicioEditando(null);
   };
 
@@ -47,16 +48,13 @@ const Servicios = () => {
 
   const handleEliminar = async (id) => {
     if (!window.confirm('¿Estás seguro de eliminar este servicio?')) return;
-
     try {
       const res = await fetch(`http://localhost:4000/servicios/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
-
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error al eliminar');
-
       setServicios(prev => prev.filter(s => s._id !== id));
     } catch (err) {
       alert(err.message);
@@ -64,12 +62,12 @@ const Servicios = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-        <h2 className="mb-0">Servicios</h2>
+    <div className="container py-5 custom-container">
+      <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <h2 className="fw-bold text-primary">Nuestros Servicios</h2>
         {(user?.rol === 'administrador' || user?.rol === 'absoluteAdmin') && (
           <button
-            className="btn btn-outline-primary btn-sm rounded-pill"
+            className="btn btn-outline-primary custom-button"
             onClick={() => {
               setServicioEditando(null);
               setShowModal(true);
@@ -81,16 +79,19 @@ const Servicios = () => {
       </div>
 
       {loading ? (
-        <p>Cargando servicios...</p>
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status" />
+          <p className="mt-3">Cargando servicios...</p>
+        </div>
       ) : error ? (
         <p className="text-danger">{error}</p>
       ) : servicios.length === 0 ? (
-        <p>No hay servicios disponibles.</p>
+        <p className="text-muted">No hay servicios disponibles actualmente.</p>
       ) : (
         <div className="row">
           {servicios.map((servicio, index) => (
             <div
-              className="col-md-4 mb-4 fade-in"
+              className="col-md-6 col-lg-4 mb-4 fade-in"
               key={servicio._id}
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -99,14 +100,14 @@ const Servicios = () => {
                   <img
                     src={`http://localhost:4000${servicio.imagenUrl}`}
                     alt={servicio.nombre}
-                    className="card-img-top rounded-top-4 object-fit-cover"
+                    className="card-img-top object-fit-cover"
                     style={{ height: '220px', objectFit: 'cover' }}
                   />
                 )}
                 <div className="card-body d-flex flex-column justify-content-between">
                   <div>
-                    <h5 className="card-title">{servicio.nombre}</h5>
-                    <p className="card-text mb-1">{servicio.descripcion}</p>
+                    <h5 className="card-title text-dark">{servicio.nombre}</h5>
+                    <p className="card-text text-muted">{servicio.descripcion}</p>
                     <p className="card-text mb-1">
                       <strong>Costo:</strong> €{servicio.costo}
                     </p>
@@ -118,13 +119,13 @@ const Servicios = () => {
                   {(user?.rol === 'administrador' || user?.rol === 'absoluteAdmin') && (
                     <div className="d-flex justify-content-between mt-3">
                       <button
-                        className="btn btn-sm btn-outline-primary rounded-pill"
+                        className="btn btn-sm btn-outline-primary custom-button"
                         onClick={() => handleEditar(servicio)}
                       >
                         ✏️ Editar
                       </button>
                       <button
-                        className="btn btn-sm btn-outline-danger rounded-pill"
+                        className="btn btn-sm btn-outline-danger custom-button"
                         onClick={() => handleEliminar(servicio._id)}
                       >
                         🗑️ Eliminar

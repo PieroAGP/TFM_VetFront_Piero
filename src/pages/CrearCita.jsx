@@ -124,7 +124,7 @@ const CrearCita = () => {
 };
 
   return (
-    <div className="container mt-4">
+    <div className="container custom-container">
       <h2>Crear nueva cita</h2>
 
       <form onSubmit={handleSubmit}>
@@ -140,7 +140,7 @@ const CrearCita = () => {
             <option value="">Seleccione un profesional</option>
             {profesionales.map((p) => (
               <option key={p._id} value={p._id}>
-                {p.nombre} ({p.email})
+                {p.nombre}
               </option>
             ))}
           </select>

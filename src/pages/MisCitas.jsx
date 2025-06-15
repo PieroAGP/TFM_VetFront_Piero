@@ -24,7 +24,7 @@ const MisCitas = () => {
   }, [user]);
 
   return (
-    <div className="container mt-4">
+    <div className="container custom-container">
       <h2 className="text-center mb-4">
         {user.rol === "usuario" ? "Mis Citas" : "Citas a Atender"}
       </h2>
