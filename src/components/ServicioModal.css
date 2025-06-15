@@ -1,0 +1,23 @@
+/* Fondo suavizado */
+.servicio-modal-overlay {
+  background-color: rgba(241, 239, 236, 0.95);
+}
+
+/* Contenido con el mismo color de fondo */
+.servicio-modal-content {
+  background-color: #D8DBBD;
+  animation: zoomIn 0.25s ease;
+  border: none;
+}
+
+/* Animación sutil */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

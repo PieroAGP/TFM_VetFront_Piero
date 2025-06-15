@@ -1,0 +1,62 @@
+/* NAVBAR PERSONALIZADA */
+.navbar {
+  background-color: #4E6688 !important;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #ffffff !important;
+  letter-spacing: 1px;
+}
+
+.navbar .btn {
+  border-radius: 30px;
+  border: 1px solid #ffffff;
+  transition: all 0.3s ease;
+}
+
+.navbar .btn:hover {
+  background-color: #ffffff;
+  color: #4E6688;
+  border-color: #ffffff;
+}
+
+.navbar .dropdown-menu {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.navbar .dropdown-item {
+  transition: background 0.2s ease;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: #e6e6e6;
+}
+
+@media (max-width: 768px) {
+  .navbar .btn {
+    margin-bottom: 0.5rem;
+  }
+}
+
+
+/* Estilo para que los dropdowns sean suaves y consistentes */
+.dropdown-menu-dark {
+  background-color: #343a40;
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.dropdown-item {
+  color: #ffffff;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #495057;
+}
