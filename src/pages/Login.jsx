@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Login.css';
 
+import { apiUrl } from '../config';
+
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [mensaje, setMensaje] = useState('');
@@ -17,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:4000/users/login', {
+      const res = await fetch(`${apiUrl}users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -27,7 +29,7 @@ const Login = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Error');
 
-      const session = await fetch('http://localhost:4000/users/session', {
+      const session = await fetch(`${apiUrl}/users/session`, {
         credentials: 'include',
       });
 

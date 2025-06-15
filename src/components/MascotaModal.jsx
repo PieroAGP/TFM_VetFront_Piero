@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
+import { apiUrl } from '../config';
+
 const MascotaModal = ({ visible, onClose, onMascotaGuardada, mascotaEditando }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -59,8 +61,8 @@ const MascotaModal = ({ visible, onClose, onMascotaGuardada, mascotaEditando }) 
     }
 
     const url = mascotaEditando
-      ? `http://localhost:4000/mascotas/${mascotaEditando._id}`
-      : 'http://localhost:4000/mascotas';
+      ? `${apiUrl}/mascotas/${mascotaEditando._id}`
+      : `${apiUrl}/mascotas`;
 
     const method = mascotaEditando ? 'PUT' : 'POST';
 

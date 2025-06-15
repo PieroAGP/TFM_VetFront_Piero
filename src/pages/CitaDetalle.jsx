@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { apiUrl } from '../config';
+
 const CitaDetalle = () => {
   const { id } = useParams();
   const [cita, setCita] = useState(null);
 
   useEffect(() => {
     const fetchCita = async () => {
-      const res = await fetch(`http://localhost:4000/citas?id=${id}`, {
+      const res = await fetch(`${apiUrl}/citas?id=${id}`, {
         credentials: "include",
       });
       const data = await res.json();

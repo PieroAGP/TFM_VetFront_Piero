@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import MascotaModal from '../components/MascotaModal';
 import './MisMascotas.css';
 
+import { apiUrl } from '../config';
+
 const MisMascotas = () => {
   const { user } = useAuth();
   const [mascotas, setMascotas] = useState([]);
@@ -13,7 +15,7 @@ const MisMascotas = () => {
   useEffect(() => {
     const fetchMascotas = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/mascotas?id_usuario=${user.id}`, {
+        const res = await fetch(`${apiUrl}/mascotas?id_usuario=${user.id}`, {
           credentials: 'include',
         });
 
@@ -49,7 +51,7 @@ const MisMascotas = () => {
     if (!window.confirm('¿Eliminar esta mascota?')) return;
 
     try {
-      const res = await fetch(`http://localhost:4000/mascotas/${id}`, {
+      const res = await fetch(`${apiUrl}/mascotas/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });

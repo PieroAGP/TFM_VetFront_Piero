@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { apiUrl } from '../config';
 
 const AuthContext = createContext();
 
@@ -8,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   // Verifica la sesión al cargar la app
   const checkSession = async () => {
     try {
-      const res = await fetch("http://localhost:4000/users/session", {
+      const res = await fetch(`${apiUrl}/users/session`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await fetch("http://localhost:4000/users/logout", {
+    await fetch(`${apiUrl}/users/logout`, {
       method: "POST",
       credentials: "include",
     });

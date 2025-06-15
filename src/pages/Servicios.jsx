@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import ServicioModal from '../components/ServicioModal';
 
 import './Servicios.css'; 
+import { apiUrl } from '../config';
 
 const Servicios = () => {
   const { user } = useAuth();
@@ -15,7 +16,7 @@ const Servicios = () => {
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const res = await fetch('http://localhost:4000/servicios', {
+        const res = await fetch(`${apiUrl}/servicios`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -49,7 +50,7 @@ const Servicios = () => {
   const handleEliminar = async (id) => {
     if (!window.confirm('¿Estás seguro de eliminar este servicio?')) return;
     try {
-      const res = await fetch(`http://localhost:4000/servicios/${id}`, {
+      const res = await fetch(`${apiUrl}/servicios/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });

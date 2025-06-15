@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Register.css';
+import { apiUrl } from '../config';
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -19,7 +20,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:4000/users', {
+      const res = await fetch(`${apiUrl}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

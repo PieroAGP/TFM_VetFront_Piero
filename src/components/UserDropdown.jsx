@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { apiUrl } from '../config';
 
 const UserDropdown = ({ user }) => {
   const [open, setOpen] = useState(false);
 
   const handleLogout = async () => {
-    await fetch('http://localhost:4000/users/logout', {
+    await fetch(`${apiUrl}/users/logout`, {
       method: 'POST',
       credentials: 'include',
     });

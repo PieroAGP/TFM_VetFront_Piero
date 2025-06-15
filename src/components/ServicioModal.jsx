@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiUrl } from '../config';
 
 const ServicioModal = ({ visible, onClose, onServicioGuardado, servicioEditando }) => {
   const [form, setForm] = useState({
@@ -32,8 +33,8 @@ const ServicioModal = ({ visible, onClose, onServicioGuardado, servicioEditando 
     setMensajeForm('');
 
     const url = servicioEditando
-      ? `http://localhost:4000/servicios/${servicioEditando._id}`
-      : 'http://localhost:4000/servicios';
+      ? `${apiUrl}servicios/${servicioEditando._id}`
+      : `${apiUrl}/servicios`;
 
     const method = servicioEditando ? 'PUT' : 'POST';
 

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import './CrearCita.css';
 
+import { apiUrl } from '../config';
+
 const CrearCita = () => {
   const { user } = useAuth();
 
@@ -25,7 +27,7 @@ const CrearCita = () => {
       try {
         // Profesionales
         const resProfesionales = await fetch(
-          `http://localhost:4000/users?rol=administrador`,
+          `${apiUrl}users?rol=administrador`,
           {
             credentials: "include",
           }
@@ -35,7 +37,7 @@ const CrearCita = () => {
 
         // Mascotas del usuario
         const resMascotas = await fetch(
-          `http://localhost:4000/mascotas?id_usuario=${user.id}`,
+          `${apiUrl}mascotas?id_usuario=${user.id}`,
           {
             credentials: "include",
           }
@@ -47,7 +49,7 @@ const CrearCita = () => {
         setMascotas(filtradas);
 
         // Servicios
-        const resServicios = await fetch(`http://localhost:4000/servicios`, {
+        const resServicios = await fetch(`${apiUrl}servicios`, {
           credentials: "include",
         });
         const dataServicios = await resServicios.json();
@@ -70,7 +72,7 @@ const CrearCita = () => {
         if (!servicio) return;
 
         const res = await fetch(
-          `http://localhost:4000/citas/disponibles?id_profesional=${form.id_profesional}&fecha=${form.fecha}&duracion=${servicio.duracion}`
+          `${apiUrl}citas/disponibles?id_profesional=${form.id_profesional}&fecha=${form.fecha}&duracion=${servicio.duracion}`
         );
         const data = await res.json();
         setTramosDisponibles(data);
@@ -98,7 +100,7 @@ const CrearCita = () => {
       return;
     }
 
-    const res = await fetch("http://localhost:4000/citas", {
+    const res = await fetch(`${apiUrl}citas`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

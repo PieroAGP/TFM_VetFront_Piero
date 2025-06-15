@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./MisCitas.css";
 
+import { apiUrl } from '../config';
+
 const MisCitas = () => {
   const { user } = useAuth();
   const [citas, setCitas] = useState([]);
 
   useEffect(() => {
     const fetchCitas = async () => {
-      let url = "http://localhost:4000/citas?";
+      let url = `${apiUrl}/citas?`;
       if (user.rol === "usuario") {
         url += `id_cliente=${user.id}`;
       } else if (user.rol === "administrador") {
