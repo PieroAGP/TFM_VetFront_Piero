@@ -92,7 +92,7 @@ const MisMascotas = () => {
               <div className="card shadow-sm h-100 rounded-4 border-0 overflow-hidden">
                 {mascota.foto && (
                   <img
-                    src={`http://localhost:4000${mascota.foto}`}
+                    src={`${apiUrl}/${mascota.foto}`}
                     className="card-img-top rounded-top-4 object-fit-cover"
                     alt={mascota.nombre}
                     style={{ height: '220px', objectFit: 'cover' }}

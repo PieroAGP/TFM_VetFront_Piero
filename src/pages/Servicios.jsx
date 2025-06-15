@@ -99,7 +99,7 @@ const Servicios = () => {
               <div className="card shadow-sm h-100 rounded-4 border-0 overflow-hidden">
                 {servicio.imagenUrl && (
                   <img
-                    src={`http://localhost:4000${servicio.imagenUrl}`}
+                    src={`${apiUrl}/${servicio.imagenUrl}`}
                     alt={servicio.nombre}
                     className="card-img-top object-fit-cover"
                     style={{ height: '220px', objectFit: 'cover' }}
